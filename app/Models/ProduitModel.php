@@ -21,11 +21,13 @@ class ProduitModel extends Model
         'nameProduit',
         'descProduit',
         'prixProduit',
+        'imageProduit',
         'payProduit',
         'villeproduit',
         'quartierProduit',
         'QtiteVendu',
         'QtiteDisponible'
+     
     ];// pour pouvoir faire des requetes directement ici 
 
     // Dates
@@ -35,25 +37,19 @@ class ProduitModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
 
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
 
     public function getProduit()
     {
        return $this->findAll();
+    }
+
+    public function getProduitCategorie($categorie)
+    {
+       return $this->where('idCategorie',$categorie);
+    }
+    public function addProduit($data)
+    {
+        $this->save($data);
     }
 }

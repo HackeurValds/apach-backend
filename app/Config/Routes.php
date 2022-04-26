@@ -33,7 +33,10 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');//if the router is empty 
 $routes->get('/liste_produit', 'ProduitController::getAllProduit');
-
+$routes->get('/liste_produit_categorie', 'ProduitController::getProduitCategorie');
+$routes->get('/detail_produit', 'ProduitController::getProduitDetail');
+$routes->post('/ajout_produit', 'ProduitController::addProduit');
+$routes->post('/modifier_produit', 'ProduitController::updateProduit');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
