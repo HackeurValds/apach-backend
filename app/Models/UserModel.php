@@ -15,14 +15,14 @@ class UserModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'idProfilUser',
+        'idlUser',
         'userName',
-        'userCountry',
-        'userTown',
+        'idQuartier',
         'datecreation',
         'dateModification',
         'email',
-        'password'
+        'password',
+        'userImage'
     ];
 
     // Dates

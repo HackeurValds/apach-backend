@@ -7,14 +7,19 @@ use CodeIgniter\Model;
 class CategorieModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'categories';
-    protected $primaryKey       = 'id';
+    protected $table            = 'categorie';
+    protected $primaryKey       = 'idCategorie';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'nomCategorie',
+        'descCategorie',
+        'iconeCategorie',
+        'etatCategorie'
+    ];
 
     // Dates
     protected $useTimestamps = false;

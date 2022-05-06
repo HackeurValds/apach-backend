@@ -32,6 +32,19 @@ class ProduitController extends BaseController
                         ->first();
         return $this->response->setJSON($data);    
     }
+    public function getProduitByFournisseur()
+    {
+        $produit = new ProduitModel();
+        $data = $produit->where('idFournisseur',$this->request->getGet('idFournisseir'))->getResult();
+        return $this->response->setJSON($data);    
+    }
+    public function getProduitByCategorieByFournisseur()
+    {
+        $produit = new ProduitModel();
+        $data = $produit->where('idFournisseur',$this->request->getGet('idFournisseir'))
+                        ->where('idCategorie',$this->request->getGet('idCategorie'))->getResult();
+        return $this->response->setJSON($data);    
+    }
     public function addProduit()
     {
         $data = [
@@ -40,19 +53,40 @@ class ProduitController extends BaseController
             'idCategorie' => $this->request->getPost('idCategorie'),
             'nameProduit' => $this->request->getPost('nameProduit'),
             'descProduit' => $this->request->getPost('descProduit'),
-            'prixProduit' => $this->request->getPost('prixProduit'),
-            'paysProduit' => $this->request->getPost('paysProduit'),
-            'villeProduit' => $this->request->getPost('villeProduit'),
-            'quartierProduit' => $this->request->getPost('quartierProduit'),
-            'QtiteDisponible' => $this->request->getPost('QtiteDisponible'),
+            'ancienPrix' => $this->request->getPost('ancienPrix'),
+            'nouveauPrix' => $this->request->getPost('nouveauPrix'),
+            'promotion' => 0,
+            //'pourcentageReduction' => $this->request->getPost('pourcentageReduction'),
+           // 'paysProduit' => $this->request->getPost('paysProduit'),
+           // 'villeProduit' => $this->request->getPost('villeProduit'),
+           // 'quartierProduit' => $this->request->getPost('quartierProduit'),
+            'qtiteDisponible' => $this->request->getPost('qtiteDisponible'),
         ];
-        $imageProduit = $this->request->getFile('imageProduit');
-        if(!empty($imageProduit))
+        $image1 = $this->request->getFile('image1');
+        if(!empty($image1))
         {
-			if ($imageProduit->isValid() && ! $imageProduit->hasMoved()) {
-				$cont = $imageProduit->getRandomName();
-				$imageProduit->move('image_produit/',$cont);
-                $data['imageProduit'] = $cont;
+			if ($image1->isValid() && ! $image1->hasMoved()) {
+				$cont = $image1->getRandomName();
+				$image1->move('image_produit/',$cont);
+                $data['image1'] = $cont;
+			}
+		}
+        $image2 = $this->request->getFile('image2');
+        if(!empty($image2))
+        {
+			if ($image2->isValid() && ! $image2->hasMoved()) {
+				$cont = $image2->getRandomName();
+				$image2->move('image_produit/',$cont);
+                $data['image2'] = $cont;
+			}
+		}
+        $image3 = $this->request->getFile('image3');
+        if(!empty($image3))
+        {
+			if ($image3->isValid() && ! $image3->hasMoved()) {
+				$cont = $image3->getRandomName();
+				$image3->move('image_produit/',$cont);
+                $data['image3'] = $cont;
 			}
 		}
         $produit = new ProduitModel();
@@ -63,30 +97,68 @@ class ProduitController extends BaseController
     public function updateProduit()
     {
         $data = [
-            'idUser' => $this->request->getPost('idUser'),
             'idFournisseur' => $this->request->getPost('idFournisseur'),
             'idCategorie' => $this->request->getPost('idCategorie'),
             'nameProduit' => $this->request->getPost('nameProduit'),
             'descProduit' => $this->request->getPost('descProduit'),
-            'prixProduit' => $this->request->getPost('prixProduit'),
-            'paysProduit' => $this->request->getPost('paysProduit'),
-            'villeProduit' => $this->request->getPost('villeProduit'),
-            'quartierProduit' => $this->request->getPost('quartierProduit'),
-            'QtiteDisponible' => $this->request->getPost('QtiteDisponible'),
+            'ancienPrix' => $this->request->getPost('ancienPrix'),
+            'nouveauPrix' => $this->request->getPost('nouveauPrix'),
+            'promotion' => $this->request->getPost('promotion'),
+           // 'pourcentageReduction' => $this->request->getPost('pourcentageReduction'),
+           // 'paysProduit' => $this->request->getPost('paysProduit'),
+           // 'villeProduit' => $this->request->getPost('villeProduit'),
+           // 'quartierProduit' => $this->request->getPost('quartierProduit'),
+            'qtiteDisponible' => $this->request->getPost('qtiteDisponible'),
         ];
-        $imageProduit = $this->request->getFile('imageProduit');
-        if(!empty($imageProduit))
+        $image1 = $this->request->getFile('image1');
+        if(!empty($image1))
         {
-			if ($imageProduit->isValid() && ! $imageProduit->hasMoved()) {
-				$cont = $imageProduit->getRandomName();
-				$imageProduit->move('image_produit/',$cont);
-                $data['imageProduit'] = $cont;
+			if ($image1->isValid() && ! $image1->hasMoved()) {
+				$cont = $image1->getRandomName();
+				$image1->move('image_produit/',$cont);
+                $data['image1'] = $cont;
+			}
+		}
+        $image2 = $this->request->getFile('image2');
+        if(!empty($image2))
+        {
+			if ($image2->isValid() && ! $image2->hasMoved()) {
+				$cont = $image2->getRandomName();
+				$image2->move('image_produit/',$cont);
+                $data['image2'] = $cont;
+			}
+		}
+        $image3 = $this->request->getFile('image3');
+        if(!empty($image3))
+        {
+			if ($image3->isValid() && ! $image3->hasMoved()) {
+				$cont = $image3->getRandomName();
+				$image3->move('image_produit/',$cont);
+                $data['image3'] = $cont;
 			}
 		}
         $produit = new ProduitModel();
         $produit->update($this->request->getPost('idProduit'),$data);
         return $this->response->setJSON(['status'=>'success']);
     }
-
-
+    public function setPromotion()
+    {
+        $data = [
+            'nouveauPrix' => $this->request->getPost('nouveauPrix'),
+            'promotion' => 1,
+            'pourcentageReduction' => $this->request->getPost('pourcentageReduction'),
+        ];
+        $produit = new ProduitModel();
+        $produit->update($this->request->getPost('idProduit'),$data);
+        return $this->response->setJSON(['status'=>'success']);
+    }
+    public function deletePromotion()
+    {
+        $data = [
+            'promotion' => 0,
+        ];
+        $produit = new ProduitModel();
+        $produit->update($this->request->getPost('idProduit'),$data);
+        return $this->response->setJSON(['status'=>'success']);
+    }
 }

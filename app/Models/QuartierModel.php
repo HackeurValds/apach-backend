@@ -4,30 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class FournisseurModel extends Model
+class QuartierModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'fournisseur';
-    protected $primaryKey       = 'idFournisseur';
+    protected $table            = 'quartier';
+    protected $primaryKey       = 'idQuartier';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'idUser',
-        'etatFoournisseur'
+        'nomQuartier',
+        'idVille'
     ];
 
-    public function checkIn($id)
-    {
-        $rs = $this->find($id);
-        if(count($rs)!=1){
-            return false;
-        }else{
-            return true;
-        }
-    }
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';

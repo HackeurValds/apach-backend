@@ -8,13 +8,18 @@ class MessageModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'messages';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'idMessage';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'content',
+        'dateSend',
+        'id_emetteur',
+        'id_recepteur'
+    ];
 
     // Dates
     protected $useTimestamps = false;

@@ -20,13 +20,14 @@ class ProduitModel extends Model
         'idCategorie',
         'nameProduit',
         'descProduit',
-        'prixProduit',
-        'imageProduit',
-        'payProduit',
-        'villeproduit',
-        'quartierProduit',
-        'QtiteVendu',
-        'QtiteDisponible'
+        'ancienPrix',
+        'nouveauPrix',
+        'promotion',
+        'pourcentageReduction',
+        'image1',
+        'image2',
+        'image3',
+        'qtiteDisponible'
      
     ];// pour pouvoir faire des requetes directement ici 
 
